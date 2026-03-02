@@ -110,3 +110,24 @@ loadMetrics();
 
 </body>
 </html>
+<script>
+async function sendToAI(userMessage) {
+  try {
+    const response = await fetch("https://dileep-ai-proxy.dileepscl.workers.dev", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        message: userMessage
+      })
+    });
+
+    const data = await response.json();
+    return data.response || "AI response unavailable.";
+  } catch (error) {
+    console.error("AI Error:", error);
+    return "AI system temporarily unavailable.";
+  }
+}
+</script>
